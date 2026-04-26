@@ -13,17 +13,110 @@ QtWidgetsApplication1::QtWidgetsApplication1(QWidget* parent)
 {
     ui.setupUi(this);
 
-    // 🔹 HTTP
+    ui.centralWidget->setStyleSheet(
+        "background-color: #1e1e2e;"
+    );
+
+    ui.gridLayoutWidget->setStyleSheet(
+        "background-color: #2a2a3e;"
+        "border-radius: 8px;"
+        "padding: 8px;"
+    );
+
+    ui.username->setStyleSheet(
+        "background-color: #313145;"
+        "color: #cdd6f4;"
+        "border: 1px solid #45475a;"
+        "border-radius: 4px;"
+        "padding: 4px 8px;"
+        "font-size: 13px;"
+    );
+
+    ui.password->setStyleSheet(
+        "background-color: #313145;"
+        "color: #cdd6f4;"
+        "border: 1px solid #45475a;"
+        "border-radius: 4px;"
+        "padding: 4px 8px;"
+        "font-size: 13px;"
+    );
+
+    ui.btnConnexion->setStyleSheet(
+        "background-color: #89b4fa;"
+        "color: #1e1e2e;"
+        "border: none;"
+        "border-radius: 4px;"
+        "padding: 5px 10px;"
+        "font-weight: bold;"
+        "font-size: 13px;"
+    );
+
+    ui.btnInscription->setStyleSheet(
+        "background-color: #a6e3a1;"
+        "color: #1e1e2e;"
+        "border: none;"
+        "border-radius: 4px;"
+        "padding: 5px 10px;"
+        "font-weight: bold;"
+        "font-size: 13px;"
+    );
+
+    ui.messageList->setStyleSheet(
+        "background-color: #181825;"
+        "color: #cdd6f4;"
+        "border: 1px solid #45475a;"
+        "border-radius: 6px;"
+        "padding: 4px;"
+        "font-size: 13px;"
+    );
+
+    ui.zoneSaisie->setStyleSheet(
+        "background-color: #313145;"
+        "color: #cdd6f4;"
+        "border: 1px solid #45475a;"
+        "border-radius: 4px;"
+        "padding: 4px 8px;"
+        "font-size: 13px;"
+    );
+
+    ui.btnSend->setStyleSheet(
+        "background-color: #cba6f7;"
+        "color: #1e1e2e;"
+        "border: none;"
+        "border-radius: 4px;"
+        "padding: 5px 10px;"
+        "font-weight: bold;"
+        "font-size: 13px;"
+    );
+
+    ui.menuBar->setStyleSheet(
+        "background-color: #181825;"
+        "color: #cdd6f4;"
+        "border-bottom: 1px solid #45475a;"
+    );
+
+    ui.mainToolBar->setStyleSheet(
+        "background-color: #181825;"
+        "border-bottom: 1px solid #45475a;"
+    );
+
+    ui.statusBar->setStyleSheet(
+        "background-color: #181825;"
+        "color: #6c7086;"
+        "font-size: 11px;"
+    );
+
+    //HTTP
     manager = new QNetworkAccessManager(this);
 
     cookieJar = new QNetworkCookieJar(this);
     manager->setCookieJar(cookieJar);
 
-    // 🔹 UI (liste messages)
+    // UI (liste messages)
     model = new QStringListModel(this);
     ui.messageList->setModel(model);
 
-    // 🔹 WebSocket
+    //WebSocket
     socket = new QWebSocket();
 
     connect(socket, &QWebSocket::connected, this, []() {
@@ -33,7 +126,7 @@ QtWidgetsApplication1::QtWidgetsApplication1(QWidget* parent)
     connect(socket, &QWebSocket::textMessageReceived,
         this, &QtWidgetsApplication1::onMessageReceived);
 
-    // 🔹 boutons UI (à adapter à ton designer)
+    //boutons UI (à adapter à ton designer)
     connect(ui.btnInscription, &QPushButton::clicked, this, &QtWidgetsApplication1::inscription);
     connect(ui.btnConnexion, &QPushButton::clicked, this, &QtWidgetsApplication1::connexion);
     connect(ui.btnSend, &QPushButton::clicked, this, &QtWidgetsApplication1::sendMessage);
@@ -125,7 +218,7 @@ void QtWidgetsApplication1::connexion()
         QString message = obj.value("message").toString();
         qDebug() << message;
 
-        // 🔥 Connexion WebSocket après login
+        // Connexion WebSocket après login
         connectWebSocket();
 
         reply->deleteLater();

@@ -17,6 +17,7 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QNetworkCookieJar>
+#include <qfile.h>
 
 class QtWidgetsApplication1 : public QMainWindow
 {
@@ -42,5 +43,6 @@ public slots:
     void connectWebSocket();
     void sendMessage();
     void onMessageReceived(const QString& message);
+
 };
 
