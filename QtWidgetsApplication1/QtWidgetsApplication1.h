@@ -17,7 +17,7 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QNetworkCookieJar>
-#include <qfile.h>
+#include <QNetworkCookie>
 
 class QtWidgetsApplication1 : public QMainWindow
 {
