@@ -1,5 +1,0 @@
-<RCC>
-    <qresource prefix="/QtWidgetsApplication1">
-        <file>style.qss</file>
-    </qresource>
-</RCC>
